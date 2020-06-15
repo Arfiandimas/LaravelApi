@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Mahasiswa;
 
+use Auth;
+
 class MahasiswaController extends Controller
 {
     public function index()
     {
-        $mahasiswa = Mahasiswa::with(['angkatan', 'kelas'])->get();
+        $mahasiswa = Mahasiswa::with(['angkatan', 'kelas'])->where('jenis_kelamin', 'perempuan')->get();
 
         $message = [
             'mahasiswa' => $mahasiswa
@@ -22,7 +24,7 @@ class MahasiswaController extends Controller
         $req->validate([
             'nama'=>'required|max:255',
             'nim'=>'required|max:10',
-            'jenis_kelamin'=>'required|in:laki-laki,perempuan',
+            'jenis_kelamin'=>'in:laki-laki,perempuan',
             'kelas_id'=>'required|integer',
             'angkatan_id'=>'required|integer'
         ]);

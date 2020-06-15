@@ -17,7 +17,7 @@ class CreateMahasiswasTable extends Migration
             $table->bigIncrements('id');
             $table->string('nama');
             $table->string('nim', 10);
-            $table->enum('jenis_kelamin', ['laki-laki', 'perempuan']);
+            $table->set('jenis_kelamin', ['laki-laki', 'perempuan'])->nullable();
 
             $table->unsignedBigInteger('kelas_id');
             $table->foreign('kelas_id')->references('id')->on('kelas');
